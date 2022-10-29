@@ -22,8 +22,6 @@ class CreateStagesTable extends Migration
             $table->boolean('is_ready')->default(false);
 
             $table->timestamps();
-
-            $table->unique(['task_id', 'description']);
         });
     }
 
