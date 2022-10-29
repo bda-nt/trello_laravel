@@ -14,7 +14,9 @@ class CreateProjectsTable extends Migration
     public function up()
     {
         Schema::create('projects', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id'); // max 4_294_967_295
+            $table->string('name', 64)->unique();
+
             $table->timestamps();
         });
     }

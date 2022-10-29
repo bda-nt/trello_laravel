@@ -14,8 +14,16 @@ class CreateStagesTable extends Migration
     public function up()
     {
         Schema::create('stages', function (Blueprint $table) {
-            $table->id();
+            $table->foreignId('task_id')
+                ->constrained()
+                ->cascadeOnDelete()
+                ->cascadeOnUpdate();
+            $table->string('description', 128);
+            $table->boolean('is_ready')->default(false);
+
             $table->timestamps();
+
+            $table->unique(['task_id', 'description']);
         });
     }
 
