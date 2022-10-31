@@ -50,7 +50,7 @@ class CreateTasksTable extends Migration
 
             $table->date('deadline')->nullable();
             $table->string('description')->nullable();
-            $table->time('actual_time')->nullable();
+            $table->decimal('actual_time', $precision = 4, $scale = 1)->nullable();
             $table->boolean('is_accepted');
             $table->date('completed_at')->nullable();
 
