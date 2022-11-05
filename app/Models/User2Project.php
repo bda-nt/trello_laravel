@@ -17,7 +17,7 @@ class User2Project extends Model
 
     protected $table = 'user_projects';
     // protected $primaryKey = 'id';
-    // public $timestamps = false;
+    public $timestamps = true;
     protected $guarded = ['id'];
     // protected $fillable = [];
     // protected $hidden = [];
@@ -34,7 +34,27 @@ class User2Project extends Model
     | RELATIONS
     |--------------------------------------------------------------------------
     */
+    /**
+     * Connection to users
+     *
+     * Return table users
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function user()
+    {
+        return $this->hasOne(User::class, 'id', 'user_id');
+    }
 
+    /**
+     * Connection to projects
+     *
+     * Return project table
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function project()
+    {
+        return $this->hasOne(Project::class, 'id', 'project_id');
+    }
     /*
     |--------------------------------------------------------------------------
     | SCOPES
