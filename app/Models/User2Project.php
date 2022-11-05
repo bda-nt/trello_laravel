@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class User2Project extends Model
 {
@@ -38,7 +39,7 @@ class User2Project extends Model
      * Connection to users
      *
      * Return table users
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @return HasOne
      */
     public function user()
     {
@@ -49,7 +50,7 @@ class User2Project extends Model
      * Connection to projects
      *
      * Return project table
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @return HasOne
      */
     public function project()
     {
