@@ -2,63 +2,59 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
+use App\Http\Requests\Api\LoginRequest;
+use App\Http\Requests\Api\RegisterRequest;
+use Illuminate\Validation\ValidationException;
 
 class AuthController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function register(RegisterRequest $request)
     {
-        //
+        $request->validated();
+        $created_user = User::create([
+            "name" => $request->name,
+            "surname" => $request->surname,
+            "login" => $request->login,
+            "email" => $request->email,
+            "password" => bcrypt($request->password),
+        ]);
+        return response()->json([
+            'message' => 'Вы успешно зарегистрированы'
+        ], 200);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function login(LoginRequest $request)
     {
-        //
+        $request->validated();
+
+        $user = User::where('login', $request->login)->first();
+
+        if (!$user || !Hash::check($request->password, $user->password)) {
+            throw ValidationException::withMessages([
+                'login' => ['The provided credentials are incorrect.'],
+            ]);
+        }
+
+        $token =  $user->createToken($user->name)->plainTextToken;
+
+        return response()->json([
+            'name' => $user->name,
+            'surname' => $user->surname,
+            'token_type' => 'Bearer',
+            'token' => $token,
+            'expires_at' => 'Never'
+        ], 200);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+    public function logout(Request $request)
     {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        $request->user()->currentAccessToken()->delete();
+        return response()->json([
+            'message' => 'Вы успешно вышли из системы',
+        ]);
     }
 }

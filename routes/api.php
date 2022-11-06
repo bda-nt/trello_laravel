@@ -26,6 +26,8 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::prefix('/auth')->group(function () {
             Route::post('/login', 'login')->withoutMiddleware('auth:sanctum');
             Route::post('/logout', 'logout');
+
+            Route::post('/register', 'register')->withoutMiddleware('auth:sanctum');
         });
     });
 
