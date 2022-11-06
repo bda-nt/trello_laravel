@@ -35,6 +35,31 @@ class Task extends Model
     |--------------------------------------------------------------------------
     */
 
+    public function project()
+    {
+        return $this->hasOne(Project::class, 'id', 'project_id');
+    }
+
+    public function author()
+    {
+        return $this->hasOne(User::class, 'id', 'author_id');
+    }
+
+    public function contractor()
+    {
+        return $this->hasOne(User::class, 'id', 'contractor_id');
+    }
+
+    public function status()
+    {
+        return $this->hasOne(Status::class, 'id', 'status_id');
+    }
+
+    public function stages()
+    {
+        return $this->hasMany(Stage::class, 'task_id', 'id');
+    }
+
     /*
     |--------------------------------------------------------------------------
     | SCOPES

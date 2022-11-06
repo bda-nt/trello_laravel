@@ -16,7 +16,7 @@ class User2Project extends Model
     |--------------------------------------------------------------------------
     */
 
-    protected $table = 'user_projects';
+    protected $table = 'user_project';
     // protected $primaryKey = 'id';
     public $timestamps = true;
     protected $guarded = ['id'];

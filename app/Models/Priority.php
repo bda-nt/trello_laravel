@@ -35,6 +35,11 @@ class Priority extends Model
     |--------------------------------------------------------------------------
     */
 
+    public function tasks()
+    {
+        return $this->hasMany(Task::class, 'priority_id', 'id');
+    }
+
     /*
     |--------------------------------------------------------------------------
     | SCOPES

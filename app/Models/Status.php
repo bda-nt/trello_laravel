@@ -35,6 +35,11 @@ class Status extends Model
     |--------------------------------------------------------------------------
     */
 
+    public function tasks()
+    {
+        return $this->hasMany(Task::class, 'status_id', 'id');
+    }
+
     /*
     |--------------------------------------------------------------------------
     | SCOPES
