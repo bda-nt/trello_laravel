@@ -11,3 +11,10 @@
     </ul>
 </li>
 
+
+<li class='nav-item'><a class='nav-link' href='{{ backpack_url('project') }}'><i class='nav-icon la la-question'></i> Projects</a></li>
+<li class='nav-item'><a class='nav-link' href='{{ backpack_url('user2-project') }}'><i class='nav-icon la la-question'></i> User2 projects</a></li>
+<li class='nav-item'><a class='nav-link' href='{{ backpack_url('task') }}'><i class='nav-icon la la-question'></i> Tasks</a></li>
+<li class='nav-item'><a class='nav-link' href='{{ backpack_url('stage') }}'><i class='nav-icon la la-question'></i> Stages</a></li>
+<li class='nav-item'><a class='nav-link' href='{{ backpack_url('priority') }}'><i class='nav-icon la la-question'></i> Priorities</a></li>
+<li class='nav-item'><a class='nav-link' href='{{ backpack_url('status') }}'><i class='nav-icon la la-question'></i> Statuses</a></li>
