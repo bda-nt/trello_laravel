@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\Api\PriorityResource;
+use App\Models\Priority;
 use Illuminate\Http\Request;
 
 class PriorityController extends Controller
@@ -14,7 +16,7 @@ class PriorityController extends Controller
      */
     public function index()
     {
-        //
+        return PriorityResource::collection(Priority::all());
     }
 
     /**
