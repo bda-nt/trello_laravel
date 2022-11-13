@@ -22,10 +22,13 @@ use App\Http\Controllers\Api\TaskController;
 
 Route::middleware('auth:sanctum')->group(function () {
 
+    //TODO: csrf, cors добавить и /login посмотреть
     Route::controller(AuthController::class)->group(function () {
         Route::prefix('/auth')->group(function () {
             Route::post('/login', 'login')->withoutMiddleware('auth:sanctum');
             Route::post('/logout', 'logout');
+
+            Route::post('/register', 'register')->withoutMiddleware('auth:sanctum');
         });
     });
 

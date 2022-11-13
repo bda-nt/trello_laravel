@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\Api\StatusResource;
+use App\Models\Status;
 use Illuminate\Http\Request;
 
 class StatusController extends Controller
@@ -14,7 +16,7 @@ class StatusController extends Controller
      */
     public function index()
     {
-        //
+        return StatusResource::collection(Status::all());
     }
 
     /**
