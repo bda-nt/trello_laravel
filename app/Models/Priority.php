@@ -34,8 +34,8 @@ class Priority extends Model
     */
 
     protected $table = 'priorities';
-    // protected $primaryKey = 'id';
-    // public $timestamps = false;
+    protected $primaryKey = 'id';
+    public $timestamps = true;
     protected $guarded = ['id'];
     // protected $fillable = [];
     // protected $hidden = [];
