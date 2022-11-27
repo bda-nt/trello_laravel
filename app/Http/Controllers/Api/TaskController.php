@@ -5,8 +5,10 @@ namespace App\Http\Controllers\Api;
 use App\Models\Task;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Api\TaskShowRequest;
 use App\Http\Requests\Api\TaskIndexRequest;
 use App\Http\Resources\Api\TaskShortResource;
+use App\Models\Stage;
 
 class TaskController extends Controller
 {
@@ -76,9 +78,38 @@ class TaskController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(TaskShowRequest $request)
     {
-        //
+        $task = Task::join('projects', function ($join) {
+            $join->on("tasks.project_id", "=", "projects.id");
+        })
+            ->join('users', function ($join) {
+                $join->on("tasks.contractor_id", "=", "users.id");
+            })
+            ->join('statuses', function ($join) {
+                $join->on("tasks.status_id", "=", "statuses.id");
+            })
+            ->join('priorities', function ($join) {
+                $join->on("tasks.priority_id", "=", "priorities.id");
+            })
+            ->where('tasks.project_id', '=', $request->projectId)
+            ->select([
+                'projects.name AS project_name', 'tasks.project_id',
+                'tasks.id AS task_id', 'tasks.name AS task_name',
+                'tasks.contractor_id', 'users.name AS contractor_name',
+                'users.surname AS contractor_surname',
+                'tasks.priority_id', 'priorities.name AS priority_name',
+                'tasks.status_id', 'statuses.name AS status_name',
+                'tasks.deadline', 'tasks.description', 'tasks.actual_time',
+            ])
+            ->find($request->taskId);
+        $stages = Stage::where('task_id', '=', $request->taskId)
+            ->get(['stages.description', 'stages.is_ready']);
+        // Можно объединить в один запрос
+        // Сделаем это после первой работающей версией
+        // ресурс тоже потом добавим
+        $task->stages = $stages;
+        return $task;
     }
 
     /**

@@ -60,9 +60,9 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::prefix('/tasks')->group(function () {
             Route::get('/', 'index');
             Route::post('/', 'store');
-            Route::get('/{id}', 'show')->whereNumber('id');
-            Route::put('/{id}', 'update')->whereNumber('id');
-            Route::put('/changeStatus/{id}', 'updateStatus')->whereNumber('id');
+            Route::get('/{projectId}/{taskId}', 'show')->whereNumber('projectId')->whereNumber('taskId');
+            Route::put('/{projectId}/{taskId}', 'update')->whereNumber('projectId')->whereNumber('taskId');
+            Route::put('/changeStatus/{projectId}/{taskId}', 'updateStatus')->whereNumber('projectId')->whereNumber('taskId');
         });
     });
 });
