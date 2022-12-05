@@ -93,7 +93,7 @@ class TaskController extends Controller
         $res = [];
         if ($request->stages !== null) {
             foreach ($request->stages as $key => $stage) {
-                $stages[] = new Stage(['description' => $stage]); // is_ready default = 0;
+                $stages[] = new Stage(['description' => $stage, 'is_ready' => false]);
             }
             $res = $task->stages()->saveMany($stages);
         }

@@ -20,7 +20,7 @@ class CreateStagesTable extends Migration
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate();
             $table->string('description', 128);
-            $table->boolean('is_ready')->default(false);
+            $table->boolean('is_ready');
 
             $table->timestamps();
         });
