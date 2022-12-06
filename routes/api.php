@@ -62,7 +62,7 @@ Route::middleware('auth:sanctum')->group(function () {
             Route::post('/', 'store');
             Route::get('/{projectId}/{taskId}', 'show')->whereNumber('projectId')->whereNumber('taskId');
             Route::put('/{projectId}/{taskId}', 'update')->whereNumber('projectId')->whereNumber('taskId');
-            Route::put('/changeStatus/{projectId}/{taskId}', 'updateStatus')->whereNumber('projectId')->whereNumber('taskId'); // мб patch сделать
+            //Route::put('/changeStatus/{projectId}/{taskId}', 'updateStatus')->whereNumber('projectId')->whereNumber('taskId'); // мб patch сделать
         });
     });
 });
