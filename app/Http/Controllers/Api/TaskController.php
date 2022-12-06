@@ -156,13 +156,7 @@ class TaskController extends Controller
         $stages = $request->stages;
         if ($stages !== null) {
             foreach ($stages as $key => $stage) {
-                // Если есть id то должно быть или is_ready или description или то и то
-                // если id нет. то должно быть is ready и desk. При этом создается новый stage
-                if (array_key_exists("id", $stage)) {
-                    if ((!array_key_exists("is_ready", $stage)) && (!array_key_exists("description", $stage))) {
-                        return response(["message" => 'Неправильный stages'], 422);
-                    }
-                } else {
+                if (!array_key_exists("id", $stage)) {
                     if ((!array_key_exists("is_ready", $stage)) || (!array_key_exists("description", $stage))) {
                         return response(["message" => 'Неправильный stages'], 422);
                     }
@@ -179,6 +173,9 @@ class TaskController extends Controller
         }
         if ($task->status_id === 2) { // статус = Выполнено
             return response(["message" => 'Нельзя изменять задачи со статусом выполнено'], 403);
+        }
+        if ($task->is_off === true) {
+            return response(["message" => 'Нельзя изменять закрытые задачи'], 403);
         }
         if ($request->status_id === 2) { // статус = Выполнено
             if ($request->actual_time === null && $task->actual_time === null) {
@@ -228,8 +225,64 @@ class TaskController extends Controller
             }
         }
 
-        // Доделать само обновление
-        return $task;
+        $inputArr = $request->valid;
+        $stages = false;
+        if (array_key_exists("stages", $inputArr)) {
+            $stages = $inputArr["stages"];
+            unset($inputArr["stages"]);
+        }
+        if (sizeof($inputArr) !== 0) {
+            if ($request->status_id === 2) { // статус = Выполнено
+                $inputArr["completed_at"] = now(); // только год месяц день
+            }
+            Task::where('project_id', '=', $request->projectId)
+                ->where('id', '=', $request->taskId)
+                ->update($inputArr);
+        }
+
+        if ($stages !== false) {
+            foreach ($stages as $key => $stage) {
+                if (!array_key_exists("id", $stage)) {
+                    Stage::create([
+                        'task_id' => $task->id,
+                        'description' => $stage['description'],
+                        'is_ready' => $stage['is_ready']
+                    ]);
+                } else {
+                    // Так сделано. Так как поля в stage не валидируются. Могут быть лишние поля, например stage["test"]
+                    // Есди сделать один запрос для всех ифов.
+                    if (!array_key_exists("description", $stage) && !array_key_exists("is_ready", $stage)) {
+                        Stage::where('task_id', '=', $task->id)
+                            ->where('id', '=', $stage["id"])
+                            ->delete();
+                    }
+                    if (array_key_exists("description", $stage) && array_key_exists("is_ready", $stage)) {
+                        Stage::where('task_id', '=', $task->id)
+                            ->where('id', '=', $stage["id"])
+                            ->update([
+                                'is_ready' => $stage['is_ready'],
+                                'description' => $stage['description']
+                            ]);
+                    }
+                    if (!array_key_exists("description", $stage) && array_key_exists("is_ready", $stage)) {
+                        Stage::where('task_id', '=',  $task->id)
+                            ->where('id', '=', $stage["id"])
+                            ->update([
+                                'is_ready' => $stage['is_ready']
+                            ]);
+                    }
+                    if (array_key_exists("description", $stage) && !array_key_exists("is_ready", $stage)) {
+                        Stage::where('task_id', '=', $task->id)
+                            ->where('id', '=', $stage["id"])
+                            ->update([
+                                'description' => $stage['description']
+                            ]);
+                    }
+                }
+            }
+        }
+
+        return response(["message" => 'Успех'], 200);
     }
 
     /**

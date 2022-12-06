@@ -21,7 +21,7 @@ class TaskUpdateRequest extends FormRequest
             'taskId' => $this->route('taskId')
         ]); // изменение request
 
-        $this->validate([
+        $this->valid = $this->validate([ // изменение request
             // Эта проверка выполняется в контроллере. Экономит один запрос в бд
             // 'taskId' => [
             //     Rule::exists('tasks', 'id')->where(function ($query) {
@@ -67,9 +67,10 @@ class TaskUpdateRequest extends FormRequest
                 // 'regex:/^\d+(\.\d{1,2})?$/'
                 // Можно добавить регулярку на проверку нецелых чисел
             ],
-            'is_accepted' => [
-                'boolean' // true, false, 1, 0, "1", and "0"
-            ],
+            // 'is_accepted' => [
+            //     'boolean' // true, false, 1, 0, "1", and "0"
+            // ],
+            // В поля объектов можно записать другие имена и они не провалидируются (останутся)
             'stages' => [
                 'array',
                 'min:1',
