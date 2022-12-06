@@ -55,7 +55,7 @@ class TaskController extends Controller
                 ]);
             $sql->makeHidden(['pivot']);
             $response[] = [
-                "idProject" => $id, "nameProjects" => $sql[0]->project_name,
+                "idProject" => $id, "nameProject" => $sql[0]->project_name,
                 "tasks" => $sql
             ];
         }
