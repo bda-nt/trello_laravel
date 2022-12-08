@@ -5,7 +5,7 @@
 <li class="nav-item nav-dropdown">
     <a class="nav-link nav-dropdown-toggle" href="#"><i class="nav-icon la la-users"></i> Authentication</a>
     <ul class="nav-dropdown-items">
-        <li class="nav-item"><a class="nav-link" href="{{ backpack_url('user') }}"><i class="nav-icon la la-user"></i> <span>Users</span></a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ backpack_url('users') }}"><i class="nav-icon la la-user"></i> <span>Users</span></a></li>
         <li class="nav-item"><a class="nav-link" href="{{ backpack_url('role') }}"><i class="nav-icon la la-id-badge"></i> <span>Roles</span></a></li>
         <li class="nav-item"><a class="nav-link" href="{{ backpack_url('permission') }}"><i class="nav-icon la la-key"></i> <span>Permissions</span></a></li>
     </ul>
@@ -13,8 +13,8 @@
 
 
 <li class='nav-item'><a class='nav-link' href='{{ backpack_url('project') }}'><i class='nav-icon la la-question'></i> Projects</a></li>
-<li class='nav-item'><a class='nav-link' href='{{ backpack_url('user2-project') }}'><i class='nav-icon la la-question'></i> User2 projects</a></li>
 <li class='nav-item'><a class='nav-link' href='{{ backpack_url('task') }}'><i class='nav-icon la la-question'></i> Tasks</a></li>
 <li class='nav-item'><a class='nav-link' href='{{ backpack_url('stage') }}'><i class='nav-icon la la-question'></i> Stages</a></li>
 <li class='nav-item'><a class='nav-link' href='{{ backpack_url('priority') }}'><i class='nav-icon la la-question'></i> Priorities</a></li>
 <li class='nav-item'><a class='nav-link' href='{{ backpack_url('status') }}'><i class='nav-icon la la-question'></i> Statuses</a></li>
+<!--<li class='nav-item'><a class='nav-link' href='{{ backpack_url('user-project') }}'><i class='nav-icon la la-question'></i> Project User</a></li>-->
