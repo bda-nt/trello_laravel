@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Requests\UserRequest;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 
@@ -24,6 +23,35 @@ class UserCrudController extends \Backpack\PermissionManager\app\Http\Controller
     {
         parent::setupCreateOperation();
 
+        $this->addUserField();
+    }
+
+    public function setupListOperation()
+    {
+        parent::setupListOperation();
+
+        $this->crud->addColumn([
+            'label' => 'Projects',
+            'type' => 'select_multiple',
+            'name' => 'projects',
+            'entity' => 'projects',
+            'attribute' => 'name',
+            'model' => 'App\Model\Project'
+        ]);
+    }
+
+    public function setupUpdateOperation()
+    {
+        parent::setupUpdateOperation();
+
+        $this->addUserField();
+    }
+
+    /**
+     * @return void
+     */
+    private function addUserField(): void
+    {
         $this->crud->addField([
             'label' => 'Projects',
             'type' => 'checklist',
@@ -32,15 +60,6 @@ class UserCrudController extends \Backpack\PermissionManager\app\Http\Controller
             'attribute' => 'id',
             'model' => 'App\Models\Project',
             'pivot' => true
-        ]);
-    }
-
-    public function setupListOperation()
-    {
-        parent::setupListOperation();
-
-        $this->crud->addColumn([
-
         ]);
     }
 }
