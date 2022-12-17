@@ -31,7 +31,6 @@ class TaskController extends Controller
         // Думаю можно в одном запросе сделать несколько select обращений
         // От идеи leftjoin отказался пока что
         // resource класс не стал делать. Чтобы не тратить время. Потом сделаю.
-        // Как понял нам до 11 декабря надо уже все сделать
         foreach ($projectsId as $key => $id) {
             $sql = $user->projects()
                 ->join('tasks', function ($join) use ($userId, $isMyTasks) {
@@ -54,10 +53,12 @@ class TaskController extends Controller
                     'tasks.status_id', 'tasks.priority_id', 'tasks.deadline'
                 ]);
             $sql->makeHidden(['pivot']);
-            $response[] = [
-                "idProject" => $id, "nameProject" => $sql[0]->project_name,
-                "tasks" => $sql
-            ];
+            if (count($sql) !== 0) {
+                $response[] = [
+                    "idProject" => $id, "nameProject" => $sql[0]->project_name,
+                    "tasks" => $sql
+                ];
+            }
         }
 
         return $response;
