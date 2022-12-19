@@ -50,7 +50,8 @@ class TaskController extends Controller
                     'projects.id AS project_id', 'projects.name AS project_name',
                     'tasks.id AS task_id', 'tasks.name AS task_name',
                     'users.name AS contractor_name', 'users.surname AS contractor_surname',
-                    'tasks.status_id', 'tasks.priority_id', 'tasks.deadline'
+                    'tasks.status_id', 'tasks.priority_id', 'tasks.deadline',
+                    'users.id AS contractor_id'
                 ]);
             $sql->makeHidden(['pivot']);
             if (count($sql) !== 0) {
