@@ -36,8 +36,20 @@ class UserCrudController extends \Backpack\PermissionManager\app\Http\Controller
             'name' => 'projects',
             'entity' => 'projects',
             'attribute' => 'name',
-            'model' => 'App\Model\Project'
+            'model' => 'App\Models\Project'
         ]);
+
+        $this->crud->addColumn([
+            'label' => 'Surname',
+            'type' => 'string',
+            'name' => 'surname'
+        ])->afterColumn('name');
+
+        $this->crud->addColumn([
+            'label' => 'Login',
+            'type' => 'string',
+            'name' => 'login'
+        ])->afterColumn('surname');
     }
 
     public function setupUpdateOperation()
@@ -61,5 +73,17 @@ class UserCrudController extends \Backpack\PermissionManager\app\Http\Controller
             'model' => 'App\Models\Project',
             'pivot' => true
         ]);
+
+        $this->crud->addField([
+           'label' => 'Login',
+            'type' => 'text',
+            'name' => 'login'
+        ])->afterField('name');
+
+        $this->crud->addField([
+            'label' => 'Surname',
+            'type' => 'text',
+            'name' => 'surname'
+        ])->afterField('surname');
     }
 }

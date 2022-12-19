@@ -37,8 +37,11 @@ class Stage extends Model
     protected $table = 'stages';
     // protected $primaryKey = 'id';
     // public $timestamps = false;
-    protected $guarded = ['id'];
-    // protected $fillable = [];
+    protected $fillable = [
+        'task_id',
+        'description',
+        'is_ready'
+    ];
     // protected $hidden = [];
     // protected $dates = [];
 

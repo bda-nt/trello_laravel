@@ -102,6 +102,11 @@ class Task extends Model
         return $this->hasMany(Stage::class, 'task_id', 'id');
     }
 
+    public function priority()
+    {
+        return $this->hasOne(Priority::class, 'id', 'priority_id');
+    }
+
     /*
     |--------------------------------------------------------------------------
     | SCOPES
