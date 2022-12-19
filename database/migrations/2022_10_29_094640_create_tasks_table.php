@@ -53,6 +53,7 @@ class CreateTasksTable extends Migration
             $table->decimal('actual_time', $precision = 4, $scale = 1)->nullable();
             $table->boolean('is_accepted');
             $table->date('completed_at')->nullable();
+            $table->boolean('is_off')->default(false);
 
             $table->timestamps();
 

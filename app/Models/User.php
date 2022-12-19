@@ -123,8 +123,7 @@ class User extends Authenticatable
      */
     public function getAtctiveProject()
     {
-        // TODO: if we created archive, remake
-        $projects = $this->projects()->get();
+        $projects = $this->projects()->where('projects.is_off', '=', 'false')->get();
 
         return $projects;
     }
