@@ -21,7 +21,7 @@ class User2ProjectCrudController extends CrudController
 
     /**
      * Configure the CrudPanel object. Apply settings to all operations.
-     * 
+     *
      * @return void
      */
     public function setup()
@@ -33,24 +33,25 @@ class User2ProjectCrudController extends CrudController
 
     /**
      * Define what happens when the List operation is loaded.
-     * 
+     *
      * @see  https://backpackforlaravel.com/docs/crud-operation-list-entries
      * @return void
      */
     protected function setupListOperation()
     {
-        
+        CRUD::column('project_id');
+        CRUD::column('user_id');
 
         /**
          * Columns can be defined using the fluent syntax or array syntax:
          * - CRUD::column('price')->type('number');
-         * - CRUD::addColumn(['name' => 'price', 'type' => 'number']); 
+         * - CRUD::addColumn(['name' => 'price', 'type' => 'number']);
          */
     }
 
     /**
      * Define what happens when the Create operation is loaded.
-     * 
+     *
      * @see https://backpackforlaravel.com/docs/crud-operation-create
      * @return void
      */
@@ -58,18 +59,34 @@ class User2ProjectCrudController extends CrudController
     {
         CRUD::setValidation(User2ProjectRequest::class);
 
-        
+        $this->crud->addField([
+            'label' => 'Project',
+            'type' => 'select',
+            'name' => 'project_id',
+            'entity' => 'projects',
+            'model' => 'Project',
+            'attribute' => 'name'
+        ]);
+
+        $this->crud->addField([
+            'label' => 'User',
+            'type' => 'select',
+            'name' => 'user_id',
+            'entity' => 'users',
+            'model' => 'User',
+            'attribute' => 'name'
+        ]);
 
         /**
          * Fields can be defined using the fluent syntax or array syntax:
          * - CRUD::field('price')->type('number');
-         * - CRUD::addField(['name' => 'price', 'type' => 'number'])); 
+         * - CRUD::addField(['name' => 'price', 'type' => 'number']));
          */
     }
 
     /**
      * Define what happens when the Update operation is loaded.
-     * 
+     *
      * @see https://backpackforlaravel.com/docs/crud-operation-update
      * @return void
      */

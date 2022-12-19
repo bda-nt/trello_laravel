@@ -37,8 +37,8 @@ class User2Project extends Model
     protected $table = 'user_project';
     // protected $primaryKey = 'id';
     public $timestamps = true;
-    protected $guarded = ['id'];
-    // protected $fillable = [];
+    //protected $guarded = ['id'];
+    protected $fillable = ['project_id', 'user_id'];
     // protected $hidden = [];
     // protected $dates = [];
 

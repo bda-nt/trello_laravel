@@ -21,7 +21,7 @@ class StageCrudController extends CrudController
 
     /**
      * Configure the CrudPanel object. Apply settings to all operations.
-     * 
+     *
      * @return void
      */
     public function setup()
@@ -33,13 +33,20 @@ class StageCrudController extends CrudController
 
     /**
      * Define what happens when the List operation is loaded.
-     * 
+     *
      * @see  https://backpackforlaravel.com/docs/crud-operation-list-entries
      * @return void
      */
     protected function setupListOperation()
     {
-        CRUD::column('task_id');
+        $this->crud->addColumn([
+            'label' => 'Task',
+            'type' => 'select',
+            'name' => 'task',
+            'entity' => 'task',
+            'model' => 'App\Model\Task',
+            'attribute' => 'name'
+        ]);
         CRUD::column('description');
         CRUD::column('is_ready');
         CRUD::column('created_at');
@@ -48,13 +55,13 @@ class StageCrudController extends CrudController
         /**
          * Columns can be defined using the fluent syntax or array syntax:
          * - CRUD::column('price')->type('number');
-         * - CRUD::addColumn(['name' => 'price', 'type' => 'number']); 
+         * - CRUD::addColumn(['name' => 'price', 'type' => 'number']);
          */
     }
 
     /**
      * Define what happens when the Create operation is loaded.
-     * 
+     *
      * @see https://backpackforlaravel.com/docs/crud-operation-create
      * @return void
      */
@@ -62,22 +69,27 @@ class StageCrudController extends CrudController
     {
         CRUD::setValidation(StageRequest::class);
 
-        CRUD::field('task_id');
+        $this->crud->addField([
+            'label' => 'Task',
+            'type' => 'select',
+            'name' => 'task_id',
+            'entity' => 'task',
+            'model' => 'App\Models\Task',
+            'attribute' => 'name'
+        ]);
         CRUD::field('description');
         CRUD::field('is_ready');
-        CRUD::field('created_at');
-        CRUD::field('updated_at');
 
         /**
          * Fields can be defined using the fluent syntax or array syntax:
          * - CRUD::field('price')->type('number');
-         * - CRUD::addField(['name' => 'price', 'type' => 'number'])); 
+         * - CRUD::addField(['name' => 'price', 'type' => 'number']));
          */
     }
 
     /**
      * Define what happens when the Update operation is loaded.
-     * 
+     *
      * @see https://backpackforlaravel.com/docs/crud-operation-update
      * @return void
      */

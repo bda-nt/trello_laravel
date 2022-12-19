@@ -14,6 +14,7 @@ class CreateStagesTable extends Migration
     public function up()
     {
         Schema::create('stages', function (Blueprint $table) {
+
             $table->id(); // max 18_446_744_073_709_551_615
             $table->foreignId('task_id')
                 ->constrained()

@@ -26,8 +26,6 @@ class UserProject extends Migration
                 ->cascadeOnUpdate();
 
             $table->timestamps();
-
-            $table->unique(['project_id', 'user_id']);
         });
     }
 
