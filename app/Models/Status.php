@@ -3,7 +3,9 @@
 namespace App\Models;
 
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Testing\Fluent\Concerns\Has;
 
 /**
  * App\Models\Status
@@ -25,6 +27,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Status extends Model
 {
+    use HasFactory;
     use CrudTrait;
 
     /*
@@ -34,8 +37,8 @@ class Status extends Model
     */
 
     protected $table = 'statuses';
-    // protected $primaryKey = 'id';
-    // public $timestamps = false;
+    protected $primaryKey = 'id';
+    public $timestamps = true;
     protected $guarded = ['id'];
     // protected $fillable = [];
     // protected $hidden = [];

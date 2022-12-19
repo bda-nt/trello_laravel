@@ -16,7 +16,11 @@ class StatusController extends Controller
      */
     public function index()
     {
-        return StatusResource::collection(Status::all());
+        $statuses = Status::all();
+        $status1 = $statuses[1];
+        unset($statuses[1]);
+        $statuses[] = $status1;
+        return StatusResource::collection($statuses);
     }
 
     /**

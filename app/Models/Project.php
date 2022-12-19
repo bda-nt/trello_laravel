@@ -5,6 +5,7 @@ namespace App\Models;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Illuminate\Database\Eloquent\Model;
 
+
 /**
  * App\Models\Project
  *
@@ -12,6 +13,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $name
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Task[] $tasks
+ * @property-read int|null $tasks_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\User2Project[] $user2projects
  * @property-read int|null $user2projects_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\User[] $users
@@ -36,8 +39,8 @@ class Project extends Model
     */
 
     protected $table = 'projects';
-    // protected $primaryKey = 'id';
-    // public $timestamps = false;
+    protected $primaryKey = 'id';
+    public $timestamps = true;
     protected $guarded = ['id'];
     // protected $fillable = [];
     // protected $hidden = [];
@@ -63,6 +66,11 @@ class Project extends Model
     public function user2projects()
     {
         return $this->hasMany(User2Project::class, 'project_id', 'id');
+    }
+
+    public function tasks()
+    {
+        return $this->hasMany(Task::class, 'project_id', 'id');
     }
 
     /*

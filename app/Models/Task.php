@@ -58,8 +58,8 @@ class Task extends Model
     */
 
     protected $table = 'tasks';
-    // protected $primaryKey = 'id';
-    // public $timestamps = false;
+    protected $primaryKey = 'id';
+    public $timestamps = true;
     protected $guarded = ['id'];
     // protected $fillable = [];
     // protected $hidden = [];
