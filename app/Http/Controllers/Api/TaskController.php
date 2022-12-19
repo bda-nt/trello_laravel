@@ -173,9 +173,9 @@ class TaskController extends Controller
         if ($request->user->id !== $task->contractor_id && $request->user->id !== $task->author_id) {
             return response(["message" => 'Вы не автор и не исполнитель задачи'], 403); //
         }
-        if ($task->status_id === 2) { // статус = Выполнено
-            return response(["message" => 'Нельзя изменять задачи со статусом выполнено'], 403);
-        }
+        // if ($task->status_id === 2) { // статус = Выполнено
+        //     return response(["message" => 'Нельзя изменять задачи со статусом выполнено'], 403);
+        // }
         if ($task->is_off === true) {
             return response(["message" => 'Нельзя изменять закрытые задачи'], 403);
         }
