@@ -69,21 +69,21 @@ class UserCrudController extends \Backpack\PermissionManager\app\Http\Controller
             'type' => 'checklist',
             'name' => 'projects',
             'entity' => 'projects',
-            'attribute' => 'id',
+            'attribute' => 'name',
             'model' => 'App\Models\Project',
             'pivot' => true
         ]);
 
         $this->crud->addField([
-           'label' => 'Login',
-            'type' => 'text',
-            'name' => 'login'
-        ])->afterField('name');
-
-        $this->crud->addField([
             'label' => 'Surname',
             'type' => 'text',
             'name' => 'surname'
+        ])->afterField('name');
+
+        $this->crud->addField([
+            'label' => 'Login',
+            'type' => 'text',
+            'name' => 'login'
         ])->afterField('surname');
     }
 }
