@@ -31,11 +31,13 @@ class TaskStoreRequest extends FormRequest
                         ->where('project_id', $this->project_id);
                 }),
             ],
-            // 'contractor_id' => [ // Создание задачи только для себя. это поле игнорируется
-            //     'required',
-            //     //'numeric',
-            //     Rule::exists('users', 'id'),
-            // ],
+            'contractor_id' => [
+                'required',
+                //'numeric',
+                Rule::exists('user_project', 'user_id')->where(function ($query) {
+                    return $query->where('project_id', $this->project_id);
+                }),
+            ],
             'priority_id' => [
                 'required',
                 //'numeric',

@@ -73,16 +73,14 @@ class TaskController extends Controller
      */
     public function store(TaskStoreRequest $request)
     {
-        // $is_accepted = false;
-        // if ($request->contractor_id === $request->user->id) {
-        //     $is_accepted = true; // если автор создает задачу себе, то она автоматически принимается
-        // }
-        $is_accepted = true;
+        $is_accepted = false;
+        if ($request->contractor_id === $request->user->id) {
+            $is_accepted = true; // если автор создает задачу себе, то она автоматически принимается
+        }
         $task = Task::create([
             'project_id' => $request->project_id,
             'name' => $request->name,
-            // 'contractor_id' => $request->contractor_id,
-            'contractor_id' => $request->user->id,
+            'contractor_id' => $request->contractor_id,
             'priority_id' => $request->priority_id,
             'status_id' => 1, // Новые
             'description' => $request->description,
