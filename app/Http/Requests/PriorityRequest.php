@@ -25,19 +25,7 @@ class PriorityRequest extends FormRequest
     public function rules()
     {
         return [
-            // 'name' => 'required|min:5|max:255'
-        ];
-    }
-
-    /**
-     * Get the validation attributes that apply to the request.
-     *
-     * @return array
-     */
-    public function attributes()
-    {
-        return [
-            //
+            'name' => 'required|unique:App\Models\Priority,name'
         ];
     }
 
@@ -49,7 +37,8 @@ class PriorityRequest extends FormRequest
     public function messages()
     {
         return [
-            //
+            'name.required' => 'Навание обязательно к заполнению',
+            'name.unique' => 'Прироритет уже есть в БД'
         ];
     }
 }
