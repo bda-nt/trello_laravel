@@ -28,7 +28,7 @@ class StatusCrudController extends CrudController
     {
         CRUD::setModel(\App\Models\Status::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/status');
-        CRUD::setEntityNameStrings('status', 'statuses');
+        CRUD::setEntityNameStrings('статус', 'статусы');
     }
 
     /**
@@ -39,10 +39,10 @@ class StatusCrudController extends CrudController
      */
     protected function setupListOperation()
     {
-        CRUD::column('id');
-        CRUD::column('name');
-        CRUD::column('created_at');
-        CRUD::column('updated_at');
+        CRUD::column('id')->label('ID');
+        CRUD::column('name')->label('Название');
+        CRUD::column('created_at')->label('Дата создания');
+        CRUD::column('updated_at')->label('Дата обновления');
 
         /**
          * Columns can be defined using the fluent syntax or array syntax:
@@ -59,10 +59,9 @@ class StatusCrudController extends CrudController
      */
     protected function setupCreateOperation()
     {
+        CRUD::field('name')->label('Название');
+
         CRUD::setValidation(StatusRequest::class);
-
-        CRUD::field('name');
-
         /**
          * Fields can be defined using the fluent syntax or array syntax:
          * - CRUD::field('price')->type('number');
