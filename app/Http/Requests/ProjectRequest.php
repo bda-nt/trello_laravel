@@ -25,19 +25,7 @@ class ProjectRequest extends FormRequest
     public function rules()
     {
         return [
-            // 'name' => 'required|min:5|max:255'
-        ];
-    }
-
-    /**
-     * Get the validation attributes that apply to the request.
-     *
-     * @return array
-     */
-    public function attributes()
-    {
-        return [
-            //
+            'name' => 'required|unique:App\Models\Project,name'
         ];
     }
 
@@ -49,7 +37,8 @@ class ProjectRequest extends FormRequest
     public function messages()
     {
         return [
-            //
+            'name.required' => 'Название обязательно к заполнению',
+            'name.unique' => "Проект уже есть в БД"
         ];
     }
 }
