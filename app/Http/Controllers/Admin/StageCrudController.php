@@ -28,7 +28,7 @@ class StageCrudController extends CrudController
     {
         CRUD::setModel(\App\Models\Stage::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/stage');
-        CRUD::setEntityNameStrings('stage', 'stages');
+        CRUD::setEntityNameStrings('этап', 'этапы');
     }
 
     /**
@@ -40,17 +40,20 @@ class StageCrudController extends CrudController
     protected function setupListOperation()
     {
         $this->crud->addColumn([
-            'label' => 'Task',
+            'label' => 'Задача',
             'type' => 'select',
             'name' => 'task',
             'entity' => 'task',
             'model' => 'App\Model\Task',
             'attribute' => 'name'
         ]);
-        CRUD::column('description');
-        CRUD::column('is_ready');
-        CRUD::column('created_at');
-        CRUD::column('updated_at');
+        CRUD::column('description')->label('Описание');
+        CRUD::column('is_ready')->type('radio')->label('Готовность')->options([
+            false => 'Не сделан',
+            true => 'Сделан'
+        ]);
+        CRUD::column('created_at')->label('Дата создания');
+        CRUD::column('updated_at')->label('Дата обновления');
 
         /**
          * Columns can be defined using the fluent syntax or array syntax:
@@ -67,18 +70,18 @@ class StageCrudController extends CrudController
      */
     protected function setupCreateOperation()
     {
-        CRUD::setValidation(StageRequest::class);
-
         $this->crud->addField([
-            'label' => 'Task',
+            'label' => 'Задача',
             'type' => 'select',
             'name' => 'task_id',
             'entity' => 'task',
             'model' => 'App\Models\Task',
             'attribute' => 'name'
         ]);
-        CRUD::field('description');
-        CRUD::field('is_ready');
+        CRUD::field('description')->label('Описание');
+        CRUD::field('is_ready')->label('Готовность');
+
+        CRUD::setValidation(StageRequest::class);
 
         /**
          * Fields can be defined using the fluent syntax or array syntax:

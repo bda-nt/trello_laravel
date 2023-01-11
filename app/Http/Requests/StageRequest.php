@@ -6,6 +6,8 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class StageRequest extends FormRequest
 {
+    private $min_length = 3;
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -25,19 +27,9 @@ class StageRequest extends FormRequest
     public function rules()
     {
         return [
-            // 'name' => 'required|min:5|max:255'
-        ];
-    }
-
-    /**
-     * Get the validation attributes that apply to the request.
-     *
-     * @return array
-     */
-    public function attributes()
-    {
-        return [
-            //
+            'task_id' => 'required|integer',
+            'description' => sprintf('required|min:%u', $this->min_length),
+            'is_ready' => 'required|boolean'
         ];
     }
 
@@ -49,7 +41,8 @@ class StageRequest extends FormRequest
     public function messages()
     {
         return [
-            //
+            'description.required' => 'Описание обязательно',
+            'description.min' => sprintf('Описание котрокое, минимальная длина: %u', $this->min_length)
         ];
     }
 }
