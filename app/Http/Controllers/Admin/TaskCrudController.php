@@ -28,7 +28,7 @@ class TaskCrudController extends CrudController
     {
         CRUD::setModel(\App\Models\Task::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/task');
-        CRUD::setEntityNameStrings('task', 'tasks');
+        CRUD::setEntityNameStrings('задача', 'задачи');
     }
 
     /**
@@ -39,20 +39,20 @@ class TaskCrudController extends CrudController
      */
     protected function setupListOperation()
     {
-        CRUD::column('id');
-        CRUD::column('name');
-        CRUD::column('project_id');
-        CRUD::column('author_id');
-        CRUD::column('contractor_id');
-        CRUD::column('priority_id');
-        CRUD::column('status_id');
-        CRUD::column('deadline');
-        CRUD::column('description');
-        CRUD::column('actual_time');
-        CRUD::column('is_accepted');
-        CRUD::column('completed_at');
-        CRUD::column('created_at');
-        CRUD::column('updated_at');
+        CRUD::column('id')->label('ID');
+        CRUD::column('name')->label('Название задаче');
+        CRUD::column('project_id')->label('Проект');
+        CRUD::column('author_id')->label('Автор');
+        CRUD::column('contractor_id')->label('Исполнитель');
+        CRUD::column('priority_id')->label('Приоритет');
+        CRUD::column('status_id')->label('Статус');
+        CRUD::column('deadline')->label('Крайний срок');
+        CRUD::column('description')->label('Описание');
+        CRUD::column('actual_time')->label('Трудозатраты');
+        CRUD::column('is_accepted')->label('Принята');
+        CRUD::column('completed_at')->label('Дата завершения');
+        CRUD::column('created_at')->label('Дата создания');
+        CRUD::column('updated_at')->label('Дата обновления');
 
         /**
          * Columns can be defined using the fluent syntax or array syntax:
@@ -69,11 +69,9 @@ class TaskCrudController extends CrudController
      */
     protected function setupCreateOperation()
     {
-        CRUD::setValidation(TaskRequest::class);
-
-        CRUD::field('name');
+        CRUD::field('name')->label('Название');
         $this->crud->addField([
-            'label' => 'Project',
+            'label' => 'Проект',
             'type' => 'select',
             'name' => 'project_id',
             'entity' => 'project',
@@ -81,7 +79,7 @@ class TaskCrudController extends CrudController
             'attribute' => 'name',
         ]);
         $this->crud->addField([
-            'label' => 'Author',
+            'label' => 'Автор',
             'type' => 'select',
             'name' => 'author_id',
             'entity' => 'author',
@@ -89,7 +87,7 @@ class TaskCrudController extends CrudController
             'attribute' => 'login',
         ]);
         $this->crud->addField([
-            'label' => 'Contractor',
+            'label' => 'Исполнитель',
             'type' => 'select',
             'name' => 'contractor_id',
             'entity' => 'contractor',
@@ -97,7 +95,7 @@ class TaskCrudController extends CrudController
             'attribute' => 'login',
         ]);
         $this->crud->addField([
-            'label' => 'Priority',
+            'label' => 'Приоритет',
             'type' => 'select',
             'name' => 'priority_id',
             'entity' => 'priority',
@@ -105,18 +103,20 @@ class TaskCrudController extends CrudController
             'attribute' => 'name'
         ]);
         $this->crud->addField([
-            'label' => 'Status',
+            'label' => 'Статус',
             'type' => 'select',
             'name' => 'status_id',
             'entity' => 'status',
             'model' => 'App\Models\Status',
             'attribute' => 'name'
         ]);
-        CRUD::field('deadline');
-        CRUD::field('description');
-        CRUD::field('actual_time');
-        CRUD::field('is_accepted');
-        CRUD::field('completed_at');
+        CRUD::field('deadline')->label('Крайний срок');
+        CRUD::field('description')->label('Описание');
+        CRUD::field('actual_time')->label('Трудозатраты');
+        CRUD::field('is_accepted')->label('Принята');
+        CRUD::field('completed_at')->label('Дата завершения');
+
+        CRUD::setValidation(TaskRequest::class);
     }
 
     /**
