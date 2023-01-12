@@ -13,7 +13,7 @@
 
 
 <li class='nav-item'><a class='nav-link' href='{{ backpack_url('project') }}'><i class='nav-icon la la-question'></i> Проекты</a></li>
-<li class='nav-item'><a class='nav-link' href='{{ backpack_url('task') }}'><i class='nav-icon la la-question'></i> Tasks</a></li>
+<li class='nav-item'><a class='nav-link' href='{{ backpack_url('task') }}'><i class='nav-icon la la-question'></i> Задачи</a></li>
 <li class='nav-item'><a class='nav-link' href='{{ backpack_url('stage') }}'><i class='nav-icon la la-question'></i> Стадии</a></li>
 <li class='nav-item'><a class='nav-link' href='{{ backpack_url('priority') }}'><i class='nav-icon la la-question'></i> Приоритеты</a></li>
 <li class='nav-item'><a class='nav-link' href='{{ backpack_url('status') }}'><i class='nav-icon la la-question'></i> Статус</a></li>

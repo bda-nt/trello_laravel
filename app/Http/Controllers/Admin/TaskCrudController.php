@@ -28,7 +28,7 @@ class TaskCrudController extends CrudController
     {
         CRUD::setModel(\App\Models\Task::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/task');
-        CRUD::setEntityNameStrings('задача', 'задачи');
+        CRUD::setEntityNameStrings('задачу', 'задачи');
     }
 
     /**
@@ -40,7 +40,7 @@ class TaskCrudController extends CrudController
     protected function setupListOperation()
     {
         CRUD::column('id')->label('ID');
-        CRUD::column('name')->label('Название задаче');
+        CRUD::column('name')->label('Название задачи');
         CRUD::column('project_id')->label('Проект');
         CRUD::column('author_id')->label('Автор');
         CRUD::column('contractor_id')->label('Исполнитель');
