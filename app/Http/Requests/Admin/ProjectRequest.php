@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class User2ProjectRequest extends FormRequest
+class ProjectRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +13,8 @@ class User2ProjectRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        // only allow updates if the user is logged in
+        return backpack_auth()->check();
     }
 
     /**
@@ -24,19 +25,7 @@ class User2ProjectRequest extends FormRequest
     public function rules()
     {
         return [
-            //
-        ];
-    }
-
-    /**
-     * Get the validation attributes that apply to the request.
-     *
-     * @return array
-     */
-    public function attributes()
-    {
-        return [
-            //
+            'name' => 'required|unique:App\Models\Project,name'
         ];
     }
 
@@ -48,7 +37,8 @@ class User2ProjectRequest extends FormRequest
     public function messages()
     {
         return [
-            //
+            'name.required' => 'Название обязательно к заполнению',
+            'name.unique' => "Проект уже есть в БД"
         ];
     }
 }

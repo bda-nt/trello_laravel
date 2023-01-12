@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class PriorityRequest extends FormRequest
+class StatusRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,7 +25,7 @@ class PriorityRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|unique:App\Models\Priority,name'
+            'name' => 'required|unique:App\Models\Status,name'
         ];
     }
 
@@ -37,8 +37,8 @@ class PriorityRequest extends FormRequest
     public function messages()
     {
         return [
-            'name.required' => 'Навание обязательно к заполнению',
-            'name.unique' => 'Прироритет уже есть в БД'
+            'name.required' => 'Название обязательно к заполнению',
+            'name.unique' => 'Сататус уже существует в БД'
         ];
     }
 }
