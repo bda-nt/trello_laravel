@@ -44,11 +44,11 @@ Route::middleware('auth:sanctum')->group(function () {
         });
     });
 
-    // Route::controller(UserController::class)->group(function () {
-    //     Route::prefix('/users')->group(function () {
-    //         Route::get('/byProjects', 'byProjects');
-    //     });
-    // });
+    Route::controller(UserController::class)->group(function () {
+        Route::prefix('/users')->group(function () {
+            Route::get('/byProjects', 'index');
+        });
+    });
 
     Route::controller(PriorityController::class)->group(function () {
         Route::prefix('/priorities')->group(function () {
