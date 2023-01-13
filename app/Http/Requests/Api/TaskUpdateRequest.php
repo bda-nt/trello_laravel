@@ -55,7 +55,7 @@ class TaskUpdateRequest extends FormRequest
             ],
             'description' => [
                 'max:255',
-                'min:3',
+                //'min:3',  Убрав это, мы разрешили удалить описание.
                 'string',
             ],
             'deadline' => [

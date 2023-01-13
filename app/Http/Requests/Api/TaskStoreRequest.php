@@ -45,7 +45,7 @@ class TaskStoreRequest extends FormRequest
             ],
             'description' => [
                 'max:255',
-                'min:3',
+                //'min:3',
                 'string',
             ],
             'deadline' => [
