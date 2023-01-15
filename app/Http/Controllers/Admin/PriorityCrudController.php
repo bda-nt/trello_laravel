@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Requests\PriorityRequest;
+use App\Http\Requests\Admin\PriorityRequest;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 
@@ -28,7 +28,7 @@ class PriorityCrudController extends CrudController
     {
         CRUD::setModel(\App\Models\Priority::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/priority');
-        CRUD::setEntityNameStrings('priority', 'priorities');
+        CRUD::setEntityNameStrings('приоритет', 'приоритеты');
     }
 
     /**
@@ -39,10 +39,10 @@ class PriorityCrudController extends CrudController
      */
     protected function setupListOperation()
     {
-        CRUD::column('id');
-        CRUD::column('name');
-        CRUD::column('created_at');
-        CRUD::column('updated_at');
+        CRUD::column('id')->label('ID');
+        CRUD::column('name')->label('Название');
+        CRUD::column('created_at')->label('Дата создания');
+        CRUD::column('updated_at')->label("Дата обновления");
 
         /**
          * Columns can be defined using the fluent syntax or array syntax:
@@ -59,10 +59,8 @@ class PriorityCrudController extends CrudController
      */
     protected function setupCreateOperation()
     {
+        CRUD::field('name')->label("Название");
         CRUD::setValidation(PriorityRequest::class);
-
-        CRUD::field('name');
-
         /**
          * Fields can be defined using the fluent syntax or array syntax:
          * - CRUD::field('price')->type('number');
